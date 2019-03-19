@@ -1,0 +1,64 @@
+<div *ngIf="!dataSource.length" class="d-flex justify-content-center align-items-center" style="height: 200px">
+  <button class="Roundedbuttons" mat-raised-button color="warn">{{ 'YOUHAVENOITEMS' | translate }}.</button>
+</div>
+<div *ngIf="dataSource.length">
+  <table class="compare-table mat-table shadow1 myTable">
+    <div class="mat-row">
+      <div class="mat-cell">{{ 'Product' | translate }}</div>
+      <div class="mat-cell" *ngFor="let element of dataSource">
+        <a [routerLink]="['/main/produits/'+element.id]" class="img-product"
+           [ngStyle]="{'background': 'url('+url.concat(element.article.images[0].src)+') center','background-size': 'cover'}">
+        </a>
+      </div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-cell">{{ 'name' | translate }}</div>
+      <div class="mat-cell product-name" *ngFor="let element of dataSource">
+        {{element.name}}
+      </div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-cell ">{{ 'price' | translate }}</div>
+      <div class="mat-cell new-price" *ngFor="let element of dataSource">
+        {{element.prix}}
+      </div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-cell">{{ 'Availibility' | translate }}</div>
+      <div class="mat-cell text-muted" *ngFor="let element of dataSource">
+        <div *ngIf="element.article.stock>0">{{ 'Instock' | translate }}</div>
+        <div *ngIf="element.article.stock==0">{{ 'ondemand' | translate }}</div>
+      </div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-cell">{{ 'Description' | translate }}</div>
+      <div class="mat-cell text-muted" *ngFor="let element of dataSource">
+        {{element.descriptif}}
+      </div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-cell">{{ 'color' | translate }}</div>
+      <div class="mat-cell" *ngFor="let element of dataSource">
+        <button (click)="selectColor(element,co.name)" *ngFor="let co of element.article.colors" mat-raised-button
+                [style.background-color]="co.name"
+                class="color"></button>
+      </div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-cell"><a mat-mini-fab color="warn" mat-icon-button (click)="deleteAll()">
+        <mat-icon>clear_all</mat-icon>
+      </a></div>
+      <div class="mat-cell" *ngFor="let element of dataSource">
+        <div style="width: 90px;min-width: 90px" class="d-flex flex-row justify-content-between flex-nowrap">
+          <a mat-mini-fab color="primary" mat-icon-button
+             (click)="addToShoppingCart(element)">
+            <mat-icon>shopping_cart</mat-icon>
+          </a>
+          <a mat-mini-fab color="warn" mat-icon-button (click)="delete(element.id)">
+            <mat-icon>clear</mat-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </table>
+</div>

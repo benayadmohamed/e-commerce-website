@@ -1,0 +1,46 @@
+<div class="card-deck justify-content-center align-items-center">
+  <div class="example-loading-shade" *ngIf="load">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngFor="let prod of produits" class="card shadow1" style="width: 219.333px;max-width: 220px">
+    <img class="card-img-top " [src]="url.concat(prod.article.images[0].src)" alt="Card image cap">
+    <div class="card-body">
+      <div class="text-center">
+        <h5 class="card-title">{{prod.name}}</h5>
+        <h5 class="card-subtitle mb-2 text-muted">{{prod.categorie.name}}</h5>
+      </div>
+      <div class="d-flex justify-content-between  price">
+        <div class="d-flex flex-column justify-content-end">
+          <p *ngIf="prod.reduction" class="old-price">
+            {{prod.prix}} DH</p>
+          <p *ngIf="prod.reduction" class="new-price">
+            {{prod.prix-prod.prix*(prod.reduction.valeurPourcentage/100)}} DH
+          </p>
+          <p *ngIf="!prod.reduction" class="new-price">{{prod.prix}} DH</p></div>
+      </div>
+      <div class="divider"></div>
+      <div class="text-center">
+        <button matTooltip="Add to wishlist" (click)="addToWishlist(prod.id)" mat-icon-button>
+          <mat-icon>favorite</mat-icon>
+        </button>
+        <button matTooltip="Add to cart" (click)="addToShoppingCart(prod)" mat-icon-button>
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+        <button matTooltip="Add to compare" (click)="addToCompare(prod.id)" mat-icon-button>
+          <mat-icon>compare</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="produitPaginate.total" class="swiper-button-prevc">
+    <button (click)="prev()" [disabled]="!produitPaginate.prev_page_url" color="accent" mat-mini-fab>
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="produitPaginate.total" class="swiper-button-nextc">
+    <button (click)="next()" [disabled]="!produitPaginate.next_page_url" color="accent" mat-mini-fab>
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+</div>

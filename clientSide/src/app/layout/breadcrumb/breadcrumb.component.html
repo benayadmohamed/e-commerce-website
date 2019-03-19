@@ -1,0 +1,19 @@
+<!--
+<mc-breadcrumbs></mc-breadcrumbs>
+-->
+<!--
+<ol class="breadcrumb">
+  <li *ngFor="let breadcrumb of breadcrumbs$ | async"
+      class="breadcrumb-item">
+    <a [routerLink]="[breadcrumb.url, breadcrumb.params]">
+      {{ breadcrumb.label }}
+    </a>
+  </li>
+</ol>
+-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs">
+    <a routerLinkActive="active" [routerLink]="[breadcrumb.url, breadcrumb.params]"> {{ breadcrumb.label |
+      translate}}</a>
+  </li>
+</ol>

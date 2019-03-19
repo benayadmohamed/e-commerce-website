@@ -1,0 +1,238 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    [ngClass]="{'hiddennav':!(isHandset$ | async)}"
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="primary">{{infoSite.name}}</mat-toolbar>
+    <app-menu [loggedIn]="loggedIn"></app-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <header>
+      <mat-toolbar color="primary">
+        <mat-toolbar-row class="nav1 top-toolbar row justify-content-center">
+          <div class="col-12 col-xl-10">
+            <div class="d-flex flex-row flex-nowrap justify-content-between">
+              <div>
+                <button
+                  type="button"
+                  aria-label="Toggle sidenav"
+                  mat-icon-button
+                  (click)="drawer.toggle()"
+                  *ngIf="isHandset$ | async">
+                  <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+                <mat-icon *ngIf="!(isPhone$ | async)" class="mat-icon-sm">call</mat-icon>
+                <span *ngIf="!(isPhone$ | async)">(Tele : {{infoSite.tele}})</span>
+              </div>
+
+              <div class="top-menu">
+                <a class="buttonmenu" mat-button [matMenuTriggerFor]="menul">
+                  <div *ngIf="anglais">
+                    <img style="margin-right: 5px" src="../assets/images/gb.svg" width="18" height="10">
+                    <span *ngIf="!(isPhone$ | async)">{{ 'english' | translate| uppercase}}</span>
+                    <mat-icon class="mat-icon-sm">arrow_drop_down</mat-icon>
+                  </div>
+                  <div *ngIf="!anglais">
+                    <img style="margin-right: 5px" src="../assets/images/fr.svg" width="18" height="10">
+                    <span *ngIf="!(isPhone$ | async)">{{ 'french' | translate| uppercase}}</span>
+                    <mat-icon class="mat-icon-sm">arrow_drop_down</mat-icon>
+                  </div>
+                </a>
+                <mat-menu #menul="matMenu">
+                  <button class="d-flex flex-row flex-nowrap  align-items-center"
+                          mat-menu-item
+                          (click)="frensh()">
+                    <img style="margin-right: 5px" src="../assets/images/fr.svg" width="18" height="10">
+                    <span>{{ 'french' | translate| uppercase}}</span>
+                  </button>
+                  <button class="d-flex flex-row flex-nowrap  align-items-center"
+                          mat-menu-item
+                          (click)="english()">
+                    <img style="margin-right: 5px" src="../assets/images/gb.svg" width="18" height="10">
+                    <span>{{ 'english' | translate| uppercase}}</span>
+                  </button>
+                </mat-menu>
+                <a *ngIf="!(isHandset$ | async)" mat-button routerLink="/main/compare">{{ 'compare' | translate|
+                  uppercase}}({{compares}})</a>
+                <a *ngIf="!(isHandset$ | async)" mat-button routerLink="/main/wishlist">{{ 'wishlist' | translate|
+                  uppercase}}({{wishlist}})</a>
+                <!--<app-menu-account [loggedIn]="loggedIn" [loggedInAdmin]="loggedInAdmin"></app-menu-account>-->
+                <a class="buttonmenu" mat-button [matMenuTriggerFor]="menu">
+                  <mat-icon class="mat-icon-sm">person</mat-icon>
+                  <span *ngIf="!(isPhone$ | async)">{{ 'account' | translate| uppercase}}</span>
+                  <mat-icon class="mat-icon-sm">arrow_drop_down</mat-icon>
+                </a>
+
+                <mat-menu style="top: 32px" #menu="matMenu">
+                  <div *ngIf="!loggedIn">
+                    <button mat-menu-item routerLink="/main/login">
+                      <mat-icon>exit_to_app</mat-icon>
+                      <span>{{ 'SignIn' | translate}}</span>
+                    </button>
+                    <button *ngIf="isHandset$ | async" mat-menu-item routerLink="/main/compare">
+                      <mat-icon>compare</mat-icon>
+                      <span>{{ 'compare' | translate}}({{compares}})</span>
+                    </button>
+                    <button *ngIf="isHandset$ | async" mat-menu-item routerLink="/main/wishlist">
+                      <mat-icon>favorite</mat-icon>
+                      <span>{{ 'wishlist' | translate}}({{compares}})</span>
+                    </button>
+                    <button routerLink="/main/signup" mat-menu-item>
+                      <mat-icon>person_add</mat-icon>
+                      <span>{{ 'signup' | translate}}</span>
+                    </button>
+                  </div>
+                  <div *ngIf="loggedIn">
+                    <button routerLink="/main/accountSettingsComponent" mat-menu-item>
+                      <mat-icon>account_circle</mat-icon>
+                      <span>{{ 'MyAccount' | translate}}</span>
+                    </button>
+                    <button *ngIf="isHandset$ | async" mat-menu-item routerLink="/main/compare">
+                      <mat-icon>compare</mat-icon>
+                      <span>{{ 'compare' | translate}}({{compares}})</span>
+                    </button>
+                    <button *ngIf="isHandset$ | async" mat-menu-item routerLink="/main/wishlist">
+                      <mat-icon>favorite</mat-icon>
+                      <span>{{ 'wishlist' | translate}}({{compares}})</span>
+                    </button>
+                    <button (click)="logout($event)" mat-menu-item>
+                      <mat-icon>power_settings_new</mat-icon>
+                      <span>{{ 'logout' | translate}}</span>
+                    </button>
+                    <button *ngIf="loggedInAdmin" routerLink="/main/admin" mat-menu-item>
+                      <mat-icon>settings_applications</mat-icon>
+                      <span>{{ 'administratorspace' | translate}}</span>
+                    </button>
+                  </div>
+                </mat-menu>
+              </div>
+            </div>
+            <div class="divider"></div>
+          </div>
+        </mat-toolbar-row>
+        <mat-toolbar-row class="nav2 row justify-content-center">
+          <div class="col-12 col-xl-10">
+            <div class="d-flex flex-row flex-nowrap justify-content-between">
+              <a *ngIf="!(isPhone$ | async)" class="logo">{{infoSite.name}}</a>
+
+              <div>
+                <button mat-button routerLink="/main/ShoppingCart">
+                  <mat-icon *ngIf="shoppingCart" matBadge="{{shoppingCart}}" matBadgePosition="before"
+                            matBadgeColor="warn"
+                            class="mat-icon-lg">shopping_cart
+                  </mat-icon>
+                  <mat-icon *ngIf="!shoppingCart"
+                            class="mat-icon-lg">shopping_cart
+                  </mat-icon>
+                  <span *ngIf="!(isPhone$ | async)">{{ 'shoppingcart' | translate}}</span>
+                  <mat-icon class="mat-icon-sm">arrow_drop_down</mat-icon>
+                </button>
+                <mat-menu #menushoppingCart>
+
+                </mat-menu>
+              </div>
+            </div>
+          </div>
+        </mat-toolbar-row>
+        <mat-toolbar-row *ngIf="!(isHandset$ | async)" class="menu2">
+          <div>
+            <button mat-button color="primary" routerLink="home" routerLinkActive="active">{{ 'Home' |
+              translate|uppercase }}
+            </button>
+            <button mat-button color="primary" routerLink="produits" routerLinkActive="active">{{ 'AllProducts' |
+              translate|uppercase }}
+            </button>
+            <button *ngFor="let cat of categories" mat-button color="primary" routerLink="produitsCat/{{cat.id}}"
+                    routerLinkActive="active">{{cat.name|uppercase}}
+            </button>
+            <button mat-button color="primary" routerLink="contact" routerLinkActive="active">{{ 'contact' | translate
+              |uppercase
+              }}
+            </button>
+            <button mat-button color="primary" routerLink="whoarewe" routerLinkActive="active">{{ 'whoarewe' | translate
+              |uppercase
+              }}
+            </button>
+          </div>
+
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </header>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-xl-10">
+          <div class="main-container">
+            <app-breadcrumb></app-breadcrumb>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-toolbar color="primary" class="footer">
+      <mat-toolbar-row style="padding: 0px;height: auto;" class="row justify-content-center">
+        <div class="col-xl-10 col-md-12">
+          <div class="flex">
+
+            <div class="flex-col-1">
+              <div>
+                <h3>{{ 'LINKS' | translate| uppercase}}</h3>
+                <p class="infoFooter"><a routerLink="/main/accountSettingsComponent">{{ 'MyAccount' | translate }}</a>
+                </p>
+                <p class="infoFooter"><a routerLink="/main/contact">{{ 'contact' | translate}}</a></p>
+                <p class="infoFooter"><a routerLink="/main/ShoppingCart">{{ 'shoppingcart' | translate}}</a></p>
+                <p class="infoFooter"><a routerLink="/main/compare">{{ 'compare' | translate}}</a></p>
+                <p class="infoFooter"><a routerLink="/main/wishlist">{{ 'wishlist' | translate}}</a></p>
+              </div>
+            </div>
+            <div class="flex-col-1">
+              <div>
+                <h3>{{ 'CONTACTINFORMATION' | translate| uppercase}}</h3>
+                <p class="infoFooter">
+                  <mat-icon>location_on</mat-icon>
+                  <span>{{infoSite.adresse}}</span>
+                </p>
+                <p class="infoFooter">
+                  <mat-icon>call</mat-icon>
+                  <span>{{infoSite.tele}}</span>
+                </p>
+                <p class="infoFooter">
+                  <mat-icon>call</mat-icon>
+                  <span>{{infoSite.fax}}</span>
+                </p>
+                <p class="infoFooter">
+                  <mat-icon>schedule</mat-icon>
+                  <span>temps</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="flex-col-2">
+              <agm-map [zoom]="17" [latitude]="x" [longitude]="y">
+                <agm-marker [latitude]="x" [longitude]="y"></agm-marker>
+              </agm-map>
+            </div>
+
+          </div>
+          <div class="divider"></div>
+        </div>
+
+      </mat-toolbar-row>
+      <mat-toolbar-row style="padding: 0px;height: auto;" class="row justify-content-center">
+        <div class="col-12 col-xl-10">
+          <div class="d-flex flex-row justify-content-between ">
+            <div class="">
+              Developed by {{Developedby}}
+            </div>
+            <div class="">
+              {{ 'DesignedDevelopedby' | translate}} {{Developedby}}
+            </div>
+          </div>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>

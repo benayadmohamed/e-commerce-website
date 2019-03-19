@@ -1,0 +1,71 @@
+<mat-form-field style="width: 100%">
+  <input name="Name" required matInput type="text" #searchv (keyup)="search(searchv.value)"
+         placeholder="Search">
+</mat-form-field>
+<div *ngIf="!actualites.length" class="d-flex justify-content-center align-items-center"
+     style="height: 200px">
+  <button class="Roundedbuttons" mat-raised-button color="warn">YOU HAVE NO ITEMS .</button>
+</div>
+<div *ngIf="actualites.length">
+
+
+  <table mat-table [dataSource]="actualites" class=" shadow1 myTable">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef> Image</th>
+      <td style="width: 200px" mat-cell *matCellDef="let element">
+        <a class="img-product"
+           [ngStyle]="{'background': 'url('+url.concat(element.image.src)+') center','background-size': 'cover'}">
+        </a>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Titre">
+      <th mat-header-cell *matHeaderCellDef> Titre</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.titre}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="subtitle">
+      <th mat-header-cell *matHeaderCellDef> Sous Titre</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.sousTitre}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef> Activée</th>
+      <td mat-cell *matCellDef="let element">
+
+        <span *ngIf="element.active">oui </span>
+        <span *ngIf="!element.active">non </span>
+
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actionsColumn">
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="d-flex justify-content-center">
+
+        </div>
+      </th>
+      <td class="" mat-cell *matCellDef="let element" style="width: 118px;min-width: 118px">
+        <div class="d-flex flex-row justify-content-between flex-nowrap">
+          <a mat-mini-fab color="primary" mat-icon-button
+             routerLink="/main/admin/actualite/updateActualite/{{element.id}}">
+            <mat-icon>edit</mat-icon>
+          </a>
+          <a mat-mini-fab color="warn" mat-icon-button (click)="delete(element.id)">
+            <mat-icon>clear</mat-icon>
+          </a>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #paginator class="shadow1"
+                 [pageIndex]="actualitePaginate.current_page-1"
+                 [pageSize]="actualitePaginate.per_page"
+                 [length]="actualitePaginate.total"
+                 [pageSizeOptions]="[12, 24]"
+                 showFirstLastButtons (page)="change(paginator)"></mat-paginator>
+</div>

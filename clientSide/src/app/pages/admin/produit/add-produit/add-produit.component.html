@@ -1,0 +1,184 @@
+<div class="row  justify-content-center">
+  <form #myform class="col-sm-11 col-md-9 col-lg-9">
+    <div class="row">
+      <div class="col text-center">
+        <h3>{{ 'newproduct' | translate }}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <mat-form-field class="col">
+            <input [formControl]="name" name="Name" required matInput type="text" [(ngModel)]="produit.name"
+                   placeholder="{{ 'name' | translate }}">
+            <mat-error *ngIf="name.invalid">{{getErrorMessageName()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col">
+            <input [formControl]="prix" name="prix" required matInput type="text" [(ngModel)]="produit.prix"
+                   placeholder="{{ 'price' | translate }}">
+            <mat-error *ngIf="prix.invalid">{{getErrorMessagePrix()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col">
+            <input name="tva" required matInput type="text" [(ngModel)]="produit.tva"
+                   placeholder="{{ 'VAT' | translate }}">
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-select multiple [(value)]="produit.article.matieres"
+                        placeholder="{{ 'material' | translate }}">
+              <mat-option *ngFor="let matiere of matieres"
+                          [value]="matiere.id">{{matiere.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <mat-form-field class="col">
+            <mat-select multiple [(value)]="produit.article.colors"
+                        placeholder="{{ 'color' | translate }}">
+              <mat-option *ngFor="let color of colors"
+                          [value]="color.id">
+                <span [style.color]="color.name" [style.background-color]="color.name"
+                      class="color">{{color.name}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col">
+            <input name="taille" matInput type="text" [(ngModel)]="produit.article.taille"
+                   placeholder="{{ 'size' | translate }}">
+          </mat-form-field>
+          <mat-form-field class="col">
+            <input [formControl]="stock" name="stock" required matInput type="text" [(ngModel)]="produit.article.stock"
+                   placeholder="Stock">
+            <mat-error *ngIf="stock.invalid">{{getErrorMessageStock()}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <mat-form-field class="col">
+            <mat-select [(value)]="produit.reduction_id"
+                        placeholder="{{ 'Discount' | translate }}">
+              <mat-option>0%</mat-option>
+              <mat-option *ngFor="let reduction of reductions" [value]="reduction.id">{{reduction.valeurPourcentage}} %
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-select #cat (valueChange)="changeSousCat(cat)" [formControl]="email" [(value)]="produit.categorie_id"
+                        placeholder="{{ 'category' | translate }}">
+              <mat-option *ngFor="let categorie of categories" [value]="categorie.id">{{categorie.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-select [(value)]="produit.sousCategorie_id"
+                        placeholder="{{ 'sub-category' | translate }}">
+              <mat-option *ngFor="let sousCategorie of sousCategories" [value]="sousCategorie.id">{{sousCategorie.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col">
+
+            <div class="main-file-input d-flex flex-column">
+              <div class="file-input-preview-container d-flex flex-column">
+                <div class="d-flex justify-content-end">
+                  <button type="button" (click)="removeAll()" class="icon-16 file-input-x" mat-icon-button
+                          color="primary">
+                    <mat-icon>clear</mat-icon>
+                  </button>
+                </div>
+                <div class="file-input-drag d-flex flex-row flex-wrap">
+                  <div *ngFor="let image of produit.article.images" class="file-input-frame d-flex flex-column">
+                    <div class="d-flex justify-content-end">
+                      <button type="button" (click)="remove(image)" class="icon-12 file-input-x" mat-icon-button
+                              color="primary">
+                        <mat-icon>clear</mat-icon>
+                      </button>
+                    </div>
+                    <img [src]="image.src" alt="">
+                    <div class="file-input-frame-footer">
+                      <div>{{image.name}}</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="file-input-container d-flex flex-row">
+                <div class="d-flex flex-row align-items-center" style="flex: auto;padding-left: 5px">
+                  <mat-icon>insert_drive_file</mat-icon>
+                  <div>{{nbFile}} {{ 'filesSelected' | translate }}</div>
+                </div>
+                <button class="file-button" mat-raised-button (click)="images.click()" type="button" color="primary">
+                  <mat-icon>folder_open</mat-icon>
+                  Browse
+                  <input class="file-input-tag" required name="image" type="file" #images multiple
+                         (change)="OnChimages(images)"
+                         placeholder="Images"></button>
+              </div>
+            </div>
+
+            <!--div class="d-flex flex-row flex-nowrap">
+              <mat-form-field style="flex: auto">
+                <mat-chip-list #chipList>
+                  <mat-chip *ngFor="let fruit of fruits" [selectable]="true"
+                            [removable]="true" (removed)="remove(fruit)">
+                    {{fruit.name}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="images"
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+              </mat-form-field>
+
+              <button class="file-button" mat-raised-button (click)="images.click()" type="button" color="primary">
+                <mat-icon>home</mat-icon>
+                Browse
+                <input class="file-input-tag" required name="image" type="file" #images multiple
+                       (change)="OnChimages(images)"
+                       placeholder="Images"></button>
+            </div-->
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <mat-form-field class="col">
+            <textarea name="descriptif" matInput type="text" [(ngModel)]="produit.descriptif"
+                      placeholder="descriptif"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col text-center">
+        <button mat-raised-button [disabled]="stock.invalid||name.invalid||prix.invalid||email.invalid"
+                (click)="save(myform)"
+                color="primary">{{ 'submit' | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+
+</div>

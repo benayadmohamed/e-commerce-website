@@ -1,0 +1,80 @@
+<div class="row  justify-content-center">
+  <form #myform class="col-sm-11 col-md-9 col-lg-9">
+    <div class="row">
+      <div class="col text-center">
+        <h3>{{ 'newactuality' | translate }}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <mat-form-field class="col">
+            <input [formControl]="name" name="Titre" required matInput type="text" [(ngModel)]="actualite.titre"
+                   placeholder="Titre">
+            <mat-error *ngIf="name.invalid">{{getErrorMessageName()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col">
+            <input name="sousTitre" required matInput type="text" [(ngModel)]="actualite.sousTitre"
+                   placeholder="sous Titre">
+          </mat-form-field>
+          <div class="col">
+            <mat-checkbox name="avtive" [(ngModel)]="actualite.active">Activée</mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col">
+
+            <div class="main-file-input d-flex flex-column">
+              <div class="file-input-preview-container d-flex flex-column">
+                <div class="d-flex justify-content-end">
+                </div>
+                <div class="file-input-drag d-flex flex-row flex-wrap">
+                  <div *ngIf="actualite.image" class="file-input-frame d-flex flex-column">
+                    <div class="d-flex justify-content-end">
+                      <button type="button" (click)="remove()" class="icon-12 file-input-x"
+                              mat-icon-button
+                              color="primary">
+                        <mat-icon>clear</mat-icon>
+                      </button>
+                    </div>
+                    <img [src]="actualite.image.src" alt="">
+                    <div class="file-input-frame-footer">
+                      <div>{{actualite.image.name}}</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="file-input-container d-flex flex-row">
+                <div class="d-flex flex-row align-items-center" style="flex: auto;padding-left: 5px">
+                  <mat-icon>insert_drive_file</mat-icon>
+
+                </div>
+                <button class="file-button" mat-raised-button (click)="images.click()" type="button" color="primary">
+                  <mat-icon>folder_open</mat-icon>
+                  Browse
+                  <input required class="file-input-tag" required name="image" type="file" #images
+                         (change)="OnChimages(images)"
+                         placeholder="Images"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <button mat-raised-button [disabled]="name.invalid"
+                (click)="save(myform)"
+                color="primary">Send
+        </button>
+      </div>
+    </div>
+  </form>
+
+</div>

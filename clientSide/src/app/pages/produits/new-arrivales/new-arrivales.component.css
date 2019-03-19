@@ -1,0 +1,35 @@
+.swiper-button-prevc {
+  position: absolute;
+  z-index: 200;
+  top: 50%;
+  left: 5px;
+
+}
+
+.swiper-button-nextc {
+  position: absolute;
+  z-index: 200;
+  top: 50%;
+  right: 5px;
+}
+
+.card-deck {
+  padding: 20px 5px 5px;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-img-top {
+  height: 170px;
+}

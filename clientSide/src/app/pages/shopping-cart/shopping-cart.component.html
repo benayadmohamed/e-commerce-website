@@ -1,0 +1,112 @@
+<div *ngIf="!dataSource.data.length" class="d-flex justify-content-center align-items-center" style="height: 200px">
+  <button class="Roundedbuttons" mat-raised-button color="warn">{{ 'YOUHAVENOITEMS' | translate }}.</button>
+</div>
+<div *ngIf="dataSource.data.length">
+  <table mat-table [dataSource]="dataSource.data" class=" shadow1 myTable">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="produit">
+      <th mat-header-cell *matHeaderCellDef> {{ 'Product' | translate }}</th>
+      <td style="width: 200px" mat-cell *matCellDef="let element">
+        <a [routerLink]="['/main/produits/'+element.id]" class="img-product"
+           [ngStyle]="{'background': 'url('+url.concat(element.produit.article.images[0].src)+') center','background-size': 'cover'}">
+        </a>
+      </td>
+      <td mat-footer-cell *matFooterCellDef>
+        <button mat-raised-button routerLink="/main/produits" color="primary">{{ 'Continueshopping' | translate }}
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef> {{ 'name' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.produit.name}}
+      </td>
+      <td mat-footer-cell *matFooterCellDef>
+        <button mat-raised-button (click)="checkOut()" color="primary">{{ 'ProceedToCheckout' | translate }}
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="prix">
+      <th mat-header-cell *matHeaderCellDef> {{ 'price' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        <div>
+          <p *ngIf="element.produit.reduction" class="old-price">
+            {{element.produit.prix}} DH</p>
+          <p *ngIf="element.produit.reduction" class="new-price">
+            {{element.produit.prix-element.produit.prix*(element.produit.reduction.valeurPourcentage/100)}} DH
+          </p>
+          <p *ngIf="!element.produit.reduction" class="new-price">{{element.produit.prix}} DH</p></div>
+
+      </td>
+      <td mat-footer-cell *matFooterCellDef>
+
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Quantite">
+      <th mat-header-cell *matHeaderCellDef> {{ 'Quantity' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.produit.article.stock>0">
+          <button (click)="removeQu(element)"
+                  mat-icon-button>
+            <mat-icon>remove</mat-icon>
+          </button>
+          <span>{{element.quantite}}  </span>
+          <button
+            (click)="addQu(element)"
+            mat-icon-button>
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <span *ngIf="element.produit.article.stock<=0">{{ 'outofstock' | translate }}</span>
+      </td>
+      <td mat-footer-cell *matFooterCellDef>
+        <div class="d-flex flex-column" style="text-align: end;padding: 15px">
+          <span>{{ 'subtotal' | translate }}:</span>
+          <span class="text-muted">{{ 'VAT' | translate }}:</span>
+          <span class="new-price">{{ 'total' | translate }}:</span>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="subTotal">
+      <th mat-header-cell *matHeaderCellDef> {{ 'subtotal' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        <div>
+          <p *ngIf="element.produit.reduction" class="old-price">
+            {{element.produit.prix*element.quantite}} DH</p>
+          <p *ngIf="element.produit.reduction" class="new-price">
+            {{calcSubTotalWithReduction(element)}}
+            DH
+          </p>
+          <p *ngIf="!element.produit.reduction" class="new-price">{{calcSubTotal(element)}} DH</p></div>
+      </td>
+      <td mat-footer-cell *matFooterCellDef>
+        <div class="d-flex flex-column"><span>{{getTotale()}} DH</span>
+          <span class="text-muted"> {{getTVA()}} DH</span>
+          <span class="new-price">{{getTotale()}} DH</span></div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actionsColumn">
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="d-flex justify-content-center">
+          <a mat-mini-fab color="warn" mat-icon-button (click)="deleteAll()">
+            <mat-icon>clear_all</mat-icon>
+          </a>
+        </div>
+      </th>
+      <td class="" mat-cell *matCellDef="let element" style="width: 118px;min-width: 118px">
+        <div class="d-flex justify-content-center">
+          <a mat-mini-fab color="warn" mat-icon-button (click)="delete(element)">
+            <mat-icon>clear</mat-icon>
+          </a>
+        </div>
+      </td>
+      <td mat-footer-cell *matFooterCellDef>
+
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+</div>

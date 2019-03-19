@@ -1,0 +1,74 @@
+<form #myForm="ngForm" class="row">
+  <div class="example-container col">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <mat-form-field class="col">
+            <input [formControl]="email" name="email" matInput type="email" [(ngModel)]="profile.email"
+                   placeholder="{{ 'email' | translate }}" required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col">
+            <mat-select [(value)]="profile.profile.sexe"
+                        placeholder="{{ 'Sexe' | translate }}">
+              <mat-option value="H">{{ 'men' | translate }}
+              </mat-option>
+              <mat-option value="F">{{ 'women' | translate }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col">
+            <input matInput [(ngModel)]="profile.profile.dateN" name="dateN" [matDatepicker]="picker"
+                   placeholder="{{ 'birthdate' | translate }}">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <div class="col mt-20  text-center">
+            <button mat-raised-button (click)="save()" color="primary">{{ 'save' | translate }}</button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+          <mat-form-field class="col">
+            <input [formControl]="password2" name="password2" [(ngModel)]="oldPassword" type="password"
+                   required matInput
+                   placeholder="{{ 'currentPassword' | translate }}">
+            <mat-error *ngIf="password2.invalid">{{getErrorMessagePassword()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col">
+            <input [formControl]="password" name="password" [(ngModel)]="profile.password" type="password"
+                   required matInput
+                   placeholder="{{ 'newPassword' | translate }}">
+            <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col">
+            <input [formControl]="password_confirmation" name="password_confirmation"
+                   [(ngModel)]="profile.password_confirmation" type="password"
+                   required
+                   matInput placeholder="{{ 'confirmPassword' | translate }}">
+            <mat-error *ngIf="password_confirmation.invalid">{{getErrorMessageConfirm()}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <div class="col mt-20  text-center">
+            <button mat-raised-button (click)="save2()" color="primary">{{ 'save' | translate }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form>

@@ -1,0 +1,123 @@
+<mat-sidenav-container class="sidenav-container myMat-sidenav-container">
+  <mat-sidenav
+    #drawer
+    [ngClass]="(isHandset$ | async) ? '' : 'margB'"
+    class="sidenav shadow"
+    fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <ng-scrollbar [autoHide]="true">
+      <mat-nav-list>
+
+        <mat-accordion displayMode="flat"  class="myMat-expansion-panel my-expansion-panel">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ 'Product' | translate }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+              <a mat-list-item routerLink="produit/addProduit" routerLinkActive="active">
+                <mat-icon>add</mat-icon>
+                {{ 'newproduct' | translate }} </a>
+              <mat-divider></mat-divider>
+              <a mat-list-item routerLink="produit/listProduits" routerLinkActive="active">
+                <mat-icon>edit</mat-icon>
+                {{ 'AllProducts' | translate }} </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+          <mat-divider></mat-divider>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ 'actuality' | translate }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+              <a mat-list-item routerLink="actualite/addActualite" routerLinkActive="active">
+                <mat-icon>add</mat-icon>
+                {{ 'newactuality' | translate }} </a>
+              <mat-divider></mat-divider>
+              <a mat-list-item routerLink="actualite/listActualites" routerLinkActive="active">
+                <mat-icon>edit</mat-icon>
+                {{ 'news' | translate }} </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="commandes" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            {{ 'listoforders' | translate }} </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="infoSite" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            {{ 'Siteinformation' | translate }} </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="region" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            {{ 'listofregions' | translate }} </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="matiere" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            {{ 'Listofmaterial' | translate }} </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="ville" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            {{ 'Listofcity' | translate }} </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="marque" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            List Marque </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="categorie" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            {{ 'Listofcategory' | translate }} </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="sousCategorie" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            {{ 'Listofsubcategory' | translate }}</a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="color" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            {{ 'Listofcolor' | translate }} </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="reduction" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            {{ 'ListReduction' | translate }} </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="typeLivraison" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            {{ 'Deliverymethod' | translate }} </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="tarif" routerLinkActive="active">
+            <mat-icon>list</mat-icon>
+            {{ 'pricelist' | translate }} </a>
+          <mat-divider></mat-divider>
+        </mat-accordion>
+      </mat-nav-list>
+    </ng-scrollbar>
+  </mat-sidenav>
+  <mat-sidenav-content [ngClass]="(isHandset$ | async) ? 'm' : ''">
+    <div class="margB" [ngClass]="(isHandset$ | async) ? '' : 'mymat-sidenav-content'">
+      <mat-card>
+        <mat-card-subtitle>
+          <button
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="drawer.toggle()"
+            *ngIf="isHandset$ | async">
+            <mat-icon aria-label="Side nav toggle icon">more_vert</mat-icon>
+          </button>
+          <!--{{ 'MyAccount' | translate }}-->
+        </mat-card-subtitle>
+      </mat-card>
+      <div class="main">
+        <mat-card class="example-card">
+          <router-outlet></router-outlet>
+        </mat-card>
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,210 @@
+{
+  "SendEmailforresetPassword": "Send Email for reset Password",
+  "FamillyESSAIDI": "Familly ESSAIDI",
+  "t1p1": "Custodian of this expertise, essaidi family excels in the creation and production of inlaid work, for several generations .As evidenced by the awards won by the family in national and international exhibitions.",
+  "t1p2": "The posterity of Andalusian arts was ensured in Morocco, not only by the trade relations, but mostly by the incessant flow, since the 14th century,in Morocco by the Muslims and the Jews of Andalusia who come to take refuge there, under the growing threat of the Christians. These craftsmen have played a major role in the transmission and the perpetuity of the damasquinerie from one continent to the other, a role that is currently still continuing in Meknes. . This art of inlay of metal in another , blossomed especially in Meknes where there are dozens of craftsmen.Meknes is one of the few cities in the world where this craft tend to continue. . . At the end of the nineteenth century,the Museum of Dar Jamaï in Meknes housed a school to learn this art, and it’s where we can contemplate damascinus objects of that period.",
+  "t1p3": "Today, damascening is an art that is acceptable and appreciated by the Moroccans. This delicate art is used in the decoration of spurs, calipers guards swords and also for the manufacturing of vases, of plate, bracelets, rings…",
+  "Thedamasquinurie": "The damasquinurie",
+  "t2p1": "The Damascening is an artisanal technique which consists enchasing a wire of gold, silver or copper, on a metal surface, generally out of steel, in order to create a decorative motif. The result of this incrustation is called a damasquinure.",
+  "t2p2": "This technique, very popular in Morocco, specially in Meknès. It is used for the decoration of the brackets andswords but also to decorate the dishes, the vases and the jewelry.",
+  "t2p3": "This art of the incrustation is today a know-how in danger and Meknès is one of the last cities in the world where there is still some rare Master-craftsmen (maalems) who practice this profession.",
+  "french": "French",
+  /*{{ 'french' | translate }}*/
+  "whoarewe": "Who are we?",
+  /*{{ 'whoarewe' | translate }}*/
+  "english": "English",
+  /*{{ 'english' | translate }}*/
+  "save": "Save",
+  /*{{ 'save' | translate }}*/
+  "ProceedToCheckout": "Proceed To Checkout ",
+  /*{{ 'ProceedToCheckout' | translate }}*/
+  "Continueshopping": "Continue shopping ",
+  /*{{ 'Continueshopping' | translate }}*/
+  "Checkout": "Checkout",
+  /*{{ 'Checkout' | translate }}*/
+  "Status": "Status",
+  /*{{ 'Status' | translate }}*/
+  "shipped": "Shipped",
+  /*{{ 'shipped' | translate }}*/
+  "delivered": "Delivered",
+  /*{{ 'delivered' | translate }}*/
+  "closed": "Closed",
+  /*{{ 'closed' | translate }}*/
+  "Percentage": "Percentage",
+  /*{{ 'Percentage' | translate }}*/
+  "Rate": "Rate",
+  /*{{ 'Rate' | translate }}*/
+  "Paymentmethod": "Payment method",
+  /*{{ 'Paymentmethod' | translate }}*/
+  "subtotal": "Subtotal",
+  /*{{ 'subtotal' | translate }}*/
+  "total": "Total",
+  /*{{ 'total' | translate }}*/
+  "filesSelected": "fichiers sélectionnés",
+  /*{{ 'filesSelected' | translate }}*/
+  "Discount": "Discount",
+  /*{{ 'Discount' | translate }}*/
+  "size": "Size",
+  /*{{ 'size' | translate }}*/
+  "VAT": "VAT",
+  /*{{ 'VAT' | translate }}*/
+  "actuality": "Actuality",
+  /*{{ 'actuality' | translate }}*/
+  "news": "news",
+  /*{{ 'news' | translate }}*/
+  "newactuality": "New actuality",
+  /*{{ 'newactuality' | translate }}*/
+  "Listofcolor": "Color list",
+  /*{{ 'Listofcolor' | translate }}*/
+  "ListReduction": "list of discounts",
+  /*{{ 'ListReduction' | translate }}*/
+  "pricelist": "Price list",
+  /*{{ 'pricelist' | translate }}*/
+  "Deliverymethod": "Delivery method",
+  /*{{ 'Deliverymethod' | translate }}*/
+  "Listofcategory": "Category list",
+  /*{{ 'Listofcategory' | translate }}*/
+  "Listofsubcategory": "Sub-category list",
+  /*{{ 'Listofsubcategory' | translate }}*/
+  "Listofmaterial": "List of material",
+  /*{{ 'Listofmaterial' | translate }}*/
+  "Listofcity": "cities list",
+  /*{{ 'Listofcity' | translate }}*/
+  "listoforders": "List of orders",
+  /*{{ 'listoforders' | translate }}*/
+  "listofregions": "List of regions",
+  /*{{ 'listofregions' | translate }}*/
+  "Siteinformation": "Site information",
+  /*{{ 'Siteinformation' | translate }}*/
+  "birthdate": "Birth date",
+  /*{{ 'birthdate' | translate }}*/
+  "Moreinformation": "More information",
+  /*{{ 'Moreinformation' | translate }}*/
+  "ResetPAssword": "Reset Password",
+  /*{{ 'ResetPAssword' | translate }}*/
+  "material": "Material",
+  //{{ 'material' | translate }}
+  "CONTACTUS": "CONTACT US",
+  //{{ 'CONTACTUS' | translate }}
+  "Next": "Next",
+  //{{ 'Next' | translate }}
+  "Previous": "Previous",
+  //{{ 'Previous' | translate }}
+  "Home": "Home",
+  //{{ 'Home' | translate }}
+  "shoppingcart": "Shopping Cart",
+  //{{ 'shoppingcart' | translate }}
+  "compare": "Compare",
+  //{{ 'compare' | translate }}
+  "contact": "Contact",
+  //{{ 'contact' | translate }}
+  "color": "Color",
+  //{{ 'color' | translate }}
+  "price": "Price",
+  //{{ 'price' | translate }}
+  "new": "New",
+  //{{ 'new' | translate }}
+  "show": "Show",
+  //{{ 'show' | translate }}
+  "account": "Account",
+  //{{ 'account' | translate }}
+  "accountDashboard": "Account Dashboard",
+  //{{ 'accountDashboard' | translate }}
+  "accountSettings": "Account Settings",
+  //{{ 'accountSettings' | translate }}
+  "signOut": "Sign Out",
+  //{{ 'signOut' | translate }}
+  "category": "Category",
+  //{{ 'category' | translate }}
+  "sub-category": "Sub-category",
+  //{{ 'sub-category' | translate }}
+  "Availibility": "Availibility",
+  //{{ 'Availibility' | translate }}
+  "Instock": "In stock",
+  //{{ 'Instock' | translate }}
+  "Quantity": "Quantity",
+  //{{ 'Quantity' | translate }}
+  "Description": "Description",
+  //{{ 'Description' | translate }}
+  "Products": "Products",
+  //{{ 'Products' | translate }}
+  "Product": "Product",
+  //{{ 'Product' | translate }}
+  "newproduct": "New product",
+  //{{ 'newproduct' | translate }}
+  "AllProducts": "All Products",
+  //{{ 'AllProducts' | translate }}
+  "fullname": "Full Name",
+  //{{ 'fullname' | translate }}
+  "email": "Email",
+  //{{ 'email' | translate }}
+  "search": "search",
+  //{{ 'search' | translate }}
+  "password": "Password",
+  //{{ 'password' | translate }}
+  "phones": "Phones",
+  //{{ 'phones' | translate }}
+  "phone": "Phone",
+  //{{ 'phone' | translate }}
+  "name": "Name",
+  //{{ 'name' | translate }}
+  "message": "Message",
+  //{{ 'message' | translate }}//{{ 'message' | translate }}
+  "address": "Address",
+  //{{ 'address' | translate }}
+  "addresses": "Addresses",
+  //{{ 'addresses' | translate }}
+  "submit": "Submit",
+  //{{ 'submit' | translate }}
+  "order": "Order",
+  //{{ 'order' | translate }}
+  "orderHistory": "Order History",
+  //{{ 'orderHistory' | translate }}
+  "logout": "Logout",
+  //{{ 'logout' | translate }}
+  "firstName": "First Name",
+  //{{ 'firstName' | translate }}
+  "lastName": "Last Name",
+  //{{ 'lastName' | translate }}
+  "city": "City",
+  //{{ 'city' | translate }}
+  "region": "Region",
+  //{{ 'region' | translate }}
+  "men": "Men",
+  //{{ 'men' | translate }}
+  "women": "Women",
+  //{{ 'women' | translate }}
+  "Sexe": "Sexe",
+  //{{ 'Sexe' | translate }}
+  "billingAddress": "Billing Address",
+  //{{ 'billingAddress' | translate }}
+  "shippingAddress": "Shipping Address",
+  //{{ 'shippingAddress' | translate }}
+  "currentPassword": "Current Password",
+  //{{ 'currentPassword' | translate }}
+  "newPassword": "New Password",
+  //{{ 'newPassword' | translate }}
+  "AccountInformation": "Account Information",
+  //{{ 'AccountInformation' | translate }}
+  "MyAccount": "My Account",
+  //{{ 'MyAccount' | translate }}
+  "Changepassword": "Change password",
+  //{{ 'Changepassword' | translate }}
+  "confirmPassword": "Confirm Password",
+  //{{ 'confirmPassword' | translate }}
+  "YOUHAVENOITEMS": "YOU HAVE NO ITEMS",
+  //{{ 'YOUHAVENOITEMS' | translate }}
+  "DesignedDevelopedby": "Designed & Developed by",
+  //{{ 'DesignedDevelopedby' | translate }}
+  "SignIn": "Sign In",
+  //{{ 'SignIn' | translate }}
+  "signup": "Sign up",
+  //{{ 'signup' | translate }}
+  "LINKS": "Links",
+  //{{ 'LINKS' | translate }}
+  "wishlist": "Wishlist",
+  //{{ 'wishlist' | translate }}
+  "administratorspace": "Administrator space",
+  //{{ 'administratorspace' | translate }}
+  "CONTACTINFORMATION": "Contact information"
+}

@@ -1,0 +1,62 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon color="primary">account_circle</mat-icon>
+    </mat-card-title>
+    <mat-card-subtitle><span>{{ 'SignIn' | translate }}</span></mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="row d-flex flex-column align-items-center">
+    <form #myForm="ngForm" class="col-xl-5 col-lg-6 col-md-8 col-12">
+      <div class="example-container">
+        <mat-form-field>
+          <input [formControl]="email" name="email" matInput type="email" [(ngModel)]="myuser.email"
+                 placeholder="{{ 'email' | translate }}"
+                 required>
+          <mat-error *ngIf="erreur">Invalid Email Or Password</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input name="password" [(ngModel)]="myuser.password" required matInput
+                 placeholder="{{ 'password' | translate }}"
+                 [type]="hide ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+
+        </mat-form-field>
+        <div class="row">
+          <div class="col-12 clearfix">
+            <!--<mat-checkbox class=" float-left" matInput name="Remember">Remember me!</mat-checkbox>-->
+            <div class="row" class="float-right">
+              <div class="col">
+                <div class="row">
+                  <a routerLink="/main/signup">{{ 'signup' | translate }}</a>
+                </div>
+                <div class="row">
+                  <a routerLink="/main/requestResetPassword">{{ 'ResetPAssword' | translate }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <re-captcha
+        #captchaRef="reCaptcha"
+        siteKey="{{reCaptchaKey}}"
+        size="invisible"
+        (resolved)="$event && onSubmit($event)"
+      ></re-captcha>
+      <button type="submit" mat-fab (click)="captchaRef.execute()" [disabled]="!myForm.valid">
+        <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
+      </button>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button style="background-color: #DB4A38; color: white" mat-raised-button (click)="signinWithGoogle()">
+      <img style="margin-right: 5px" src="../assets/images/google-brands.svg" width="20" height="20">
+      Google
+    </button>
+    <button style="background-color: #3B5998; color: white" mat-raised-button (click)="facebookLogin()">
+      <img style="margin-right: 5px" src="../assets/images/facebook-f-brands.svg" width="20" height="20">
+      Facebook
+    </button>
+  </mat-card-actions>
+</mat-card>

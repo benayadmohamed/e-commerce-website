@@ -1,0 +1,49 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>
+      {{ 'signup' | translate }}
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form #myForm="ngForm">
+      <div class="example-container">
+        <mat-form-field>
+          <input [formControl]="name" name="Name" matInput type="text" [(ngModel)]="myuser.name"
+                 placeholder="{{ 'fullname' | translate }}" required>
+          <mat-error *ngIf="name.invalid">{{getErrorMessageName()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input [formControl]="email" name="email" matInput type="email" [(ngModel)]="myuser.email"
+                 placeholder="{{ 'email' | translate }}" required>
+          <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input [formControl]="password" name="password" [(ngModel)]="myuser.password" type="password"
+                 required matInput
+                 placeholder="{{ 'password' | translate }}">
+          <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input [formControl]="password_confirmation" name="password_confirmation"
+                 [(ngModel)]="myuser.password_confirmation" type="password"
+                 required
+                 matInput placeholder="{{ 'confirmPassword' | translate }}">
+          <mat-error *ngIf="password_confirmation.invalid">{{getErrorMessageConfirm()}}</mat-error>
+        </mat-form-field>
+
+
+      </div>
+      <re-captcha
+        #captchaRef="reCaptcha"
+        siteKey="{{reCaptchaKey}}"
+        size="invisible"
+        (resolved)="$event && onSubmit($event)"
+      ></re-captcha>
+      <button type="submit" mat-fab (click)="captchaRef.execute()"
+              [disabled]="name.invalid||email.invalid||password.invalid||password_confirmation.invalid">
+        <mat-icon>add</mat-icon>
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

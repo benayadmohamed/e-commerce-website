@@ -1,0 +1,12 @@
+.active {
+  border-left: 3px solid black;
+}
+
+mat-nav-list > a {
+  /*height: 40px;*/
+  border-left: 3px solid transparent;
+}
+
+mat-nav-list > a:hover {
+  border-left: 3px solid black;
+}

@@ -1,0 +1,31 @@
+.swiper-items {
+  background-size: cover;
+  background-position: center;
+}
+
+.swiper-items-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 300px;
+}
+
+.swiper-container2 {
+  width: 100%;
+  height: 100px;
+  margin: 20px auto;
+}
+
+.descriptif-container {
+  height: 150px;
+  overflow-y: auto;
+}
+
+mat-divider {
+  margin: 15px;
+}

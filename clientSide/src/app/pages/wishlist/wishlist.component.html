@@ -1,0 +1,83 @@
+<div *ngIf="!dataSource.data.length" class="d-flex justify-content-center align-items-center" style="height: 200px">
+  <button class="Roundedbuttons" mat-raised-button color="warn">{{ 'YOUHAVENOITEMS' | translate }}.</button>
+</div>
+<div *ngIf="dataSource.data.length">
+  <table mat-table [dataSource]="dataSource" class=" shadow1 myTable">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="produit">
+      <th mat-header-cell *matHeaderCellDef> Produit</th>
+      <td style="width: 200px" mat-cell *matCellDef="let element">
+        <a [routerLink]="['/main/produits/'+element.id]" class="img-product"
+           [ngStyle]="{'background': 'url('+url.concat(element.article.images[0].src)+') center','background-size': 'cover'}">
+        </a>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef> {{ 'name' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.name}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="prix">
+      <th mat-header-cell *matHeaderCellDef> {{ 'price' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.prix}} DH
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="availability">
+      <th mat-header-cell *matHeaderCellDef> {{ 'Availibility' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.article.stock>0">{{ 'Instock' | translate }}</div>
+        <div *ngIf="!(element.article.stock>0)">{{ 'ondemand' | translate }}</div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Quantite">
+      <th mat-header-cell *matHeaderCellDef> {{ 'Quantity' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.article.stock>0">
+          <button (click)="removeQu(element)"
+                  mat-icon-button>
+            <mat-icon>remove</mat-icon>
+          </button>
+          <span *ngIf="element.ligneCommande">{{element.ligneCommande.quantite}}  </span>
+          <span *ngIf="!element.ligneCommande">1</span>
+          <button
+            (click)="addQu(element)"
+            mat-icon-button>
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <span *ngIf="element.article.stock<=0">{{ 'outofstock' | translate }}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actionsColumn">
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="d-flex justify-content-center">
+          <a mat-mini-fab color="warn" mat-icon-button (click)="deleteAll()">
+            <mat-icon>clear_all</mat-icon>
+          </a>
+        </div>
+      </th>
+      <td class="" mat-cell *matCellDef="let element" style="width: 118px;min-width: 118px">
+        <div class="d-flex flex-row justify-content-between flex-nowrap">
+          <a mat-mini-fab color="primary" mat-icon-button
+             (click)="addToShoppingCart(element)">
+            <mat-icon>shopping_cart</mat-icon>
+          </a>
+          <a mat-mini-fab color="warn" mat-icon-button (click)="delete(element.id)">
+            <mat-icon>clear</mat-icon>
+          </a>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #paginator class="shadow1"
+                 [pageIndex]="produitPaginate.current_page-1"
+                 [pageSize]="produitPaginate.per_page"
+                 [length]="produitPaginate.total"
+                 [pageSizeOptions]="[12, 24]"
+                 showFirstLastButtons (page)="change(paginator)"></mat-paginator>
+</div>

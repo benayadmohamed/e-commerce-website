@@ -1,0 +1,212 @@
+<mat-sidenav-container class="sidenav-container myMat-sidenav-container">
+  <mat-sidenav
+    #drawer
+    [ngClass]="(isHandset$ | async) ? '' : 'margB'"
+    class="sidenav shadow"
+    fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <ng-scrollbar [autoHide]="true">
+      <mat-nav-list>
+
+        <mat-accordion multi displayMode="flat" class="myMat-expansion-panel my-expansion-panel">
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ 'category' | translate|uppercase }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="myTree expansion-content">
+              <ng-scrollbar [autoHide]="true">
+                <div *ngFor="let cat of categories">
+                  <button class="items" mat-button (click)="searchByCategorie_id(cat.id)">{{cat.name |
+                    uppercase}}
+                  </button>
+                  <div *ngFor="let scat of cat.sous_categories">
+                    <button class="subitems" (click)="searchBySousCategorie_id(scat.id)" mat-button>{{scat.name |
+                      uppercase}}
+                    </button>
+                  </div>
+                </div>
+              </ng-scrollbar>
+            </div>
+          </mat-expansion-panel>
+          <mat-divider></mat-divider>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ 'color' | translate|uppercase }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="expansion-content">
+              <mat-selection-list (selectionChange)="changeColors(colors_id)" #colors_id>
+                <mat-list-option checkboxPosition="before" *ngFor="let color of colors" [value]="color.id">
+
+                <span [style.color]="color.name" [style.background-color]="color.name"
+                      class="color">{{color.name}}</span>
+                </mat-list-option>
+              </mat-selection-list>
+            </div>
+          </mat-expansion-panel>
+          <mat-divider></mat-divider>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ 'material' | translate|uppercase }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="expansion-content">
+              <mat-selection-list (selectionChange)="changeMatieres(matieres_id)" #matieres_id>
+                <mat-list-option checkboxPosition="before" *ngFor="let matiere of matieres" [value]="matiere.id">
+                  {{matiere.name}}
+                </mat-list-option>
+              </mat-selection-list>
+            </div>
+          </mat-expansion-panel>
+          <mat-divider></mat-divider>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ 'price' | translate|uppercase }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="expansion-content">
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col d-flex justify-content-between">
+                      <span class="">from {{fromslider.value}} DH</span>
+                      <span class="">To   {{toslider.value}} DH</span>
+                    </div>
+                  </div>
+                  <div class="row ">
+                    <div class="col d-flex justify-content-between">
+                      <mat-slider [min]="1" (change)="chnagePrice(fromslider.value,toslider.value)"
+                                  [max]="toslider.value"
+                                  #fromslider></mat-slider>
+                      <mat-slider (change)="chnagePrice(fromslider.value,toslider.value)" [min]="fromslider.value"
+                                  [max]="100000" [value]="100000" #toslider></mat-slider>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-divider></mat-divider>
+
+        </mat-accordion>
+      </mat-nav-list>
+    </ng-scrollbar>
+  </mat-sidenav>
+  <mat-sidenav-content [ngClass]="(isHandset$ | async) ? 'm' : ''">
+    <div class="margB" [ngClass]="(isHandset$ | async) ? '' : 'mymat-sidenav-content'">
+      <mat-card>
+
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <button
+              type="button"
+              aria-label="Toggle sidenav"
+              mat-icon-button
+              (click)="drawer.toggle()"
+              *ngIf="isHandset$ | async">
+              <mat-icon aria-label="Side nav toggle icon">more_vert</mat-icon>
+            </button>
+          </div>
+          <div class="d-flex align-items-center">
+            <button mat-button [matMenuTriggerFor]="menu">{{ 'show' | translate }}
+              {{produitPaginate.per_page}}
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="change(produitPaginate.current_page,12)">12</button>
+              <button mat-menu-item (click)="change(produitPaginate.current_page,24)">24</button>
+              <button mat-menu-item (click)="change(produitPaginate.current_page,48)">48</button>
+              <button mat-menu-item (click)="change(produitPaginate.current_page,96)">96</button>
+              <button mat-menu-item (click)="change(produitPaginate.current_page,produitPaginate.total)">all</button>
+            </mat-menu>
+
+            <button *ngIf="!phone" (click)="itemsProductsSize='items-products-size-3'" mat-icon-button>
+              <mat-icon>view_list</mat-icon>
+            </button>
+            <button *ngIf="!phone" (click)="itemsProductsSize='items-products-size-2'" mat-icon-button>
+              <mat-icon>view_module</mat-icon>
+            </button>
+            <button *ngIf="!phone&&!tablet&&!pc15" (click)="itemsProductsSize='items-products-size-1'" mat-icon-button>
+              <mat-icon>view_comfy</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card>
+      <div class="main">
+        <div *ngIf="produits.length==0" class="d-flex justify-content-center align-items-center" style="height: 540px">
+          <div>{{ 'YOUHAVENOITEMS' | translate|uppercase }}</div>
+        </div>
+        <div class="d-flex flex-wrap">
+          <div
+            *ngFor="let prod of produits| paginate: { itemsPerPage: produitPaginate.per_page , currentPage: produitPaginate.current_page , totalItems: produitPaginate.total}"
+            class="items-products"
+            [ngClass]="itemsProductsSize">
+            <mat-card class="d-flex flex-column">
+
+              <a [routerLink]="['/main/produits/'+prod.id]" class="img-product"
+                 [ngStyle]="{'background': 'url('+url.concat(prod.article.images[0].src)+') center','background-size': 'cover'}">
+              </a>
+              <mat-card-content class="content flex flex-column">
+                <div class="d-flex flex-column align-items-center">
+                  <h4 class="text-muted">{{prod.categorie.name}}</h4>
+                  <a class="title" [routerLink]="['/main/produits/'+prod.id]">{{prod.name}}</a>
+                </div>
+                <div class="d-flex justify-content-between mtb-12 price">
+                  <div class="d-flex flex-column justify-content-end">
+                    <p *ngIf="prod.reduction" class="old-price">
+                      {{prod.prix}} DH</p>
+                    <p *ngIf="prod.reduction" class="new-price">
+                      {{prod.prix-prod.prix*(prod.reduction.valeurPourcentage/100)}} DH
+                    </p>
+                    <p *ngIf="!prod.reduction" class="new-price">{{prod.prix}} DH</p></div>
+                </div>
+                <p class="new-price" *ngIf="prod.article.stock<=0">{{ 'outofstock' | translate }}</p>
+                <p class="text-disc" *ngIf="itemsProductsSize==='items-products-size-3'&&!phone">
+                  {{prod.descriptif}}
+                </p>
+
+                <mat-divider style="position: relative !important;"></mat-divider>
+                <mat-card-actions class="d-flex justify-content-center">
+                  <button matTooltip="Add to wishlist" (click)="addToWishlist(prod.id)" mat-icon-button>
+                    <mat-icon>favorite</mat-icon>
+                  </button>
+                  <button matTooltip="Add to cart" (click)="addToShoppingCart(prod)" mat-icon-button>
+                    <mat-icon>shopping_cart</mat-icon>
+                  </button>
+                  <button matTooltip="Add to compare" (click)="addToCompare(prod.id)" mat-icon-button>
+                    <mat-icon>compare</mat-icon>
+                  </button>
+                  <button *ngIf="loggedInAdmin" routerLink="/main/admin/produit/updateProduit/{{prod.id}}"
+                          matTooltip="edit" mat-icon-button>
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button *ngIf="loggedInAdmin" (click)="delete(prod.id)"
+                          matTooltip="edit" mat-icon-button>
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-card-actions>
+              </mat-card-content>
+            </mat-card>
+
+          </div>
+        </div>
+
+        <div class="shadow1 d-flex justify-content-center" style="background-color: white;margin-left: 8px">
+          <pagination-controls (pageChange)="change($event)" previousLabel="{{ 'Previous' | translate }}"
+                               nextLabel="{{ 'Next' | translate }}"
+                               screenReaderPaginationLabel="Pagination"
+                               screenReaderPageLabel="page"
+                               screenReaderCurrentLabel="You're on page"></pagination-controls>
+        </div>
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

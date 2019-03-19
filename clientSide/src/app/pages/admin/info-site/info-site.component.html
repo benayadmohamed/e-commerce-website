@@ -1,0 +1,80 @@
+<div class="row  justify-content-center">
+  <form #myform class="col-sm-11 col-md-9 col-lg-9">
+    <div class="row">
+      <div class="col text-center">
+        <h3>Info Site</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <mat-form-field class="col">
+            <input [formControl]="name" name="Name" required matInput type="text" [(ngModel)]="infoSite.name"
+                   placeholder="{{ 'name' | translate }}">
+            <mat-error *ngIf="name.invalid">{{getErrorMessageName()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col">
+            <input [formControl]="email" name="Name" required matInput type="text" [(ngModel)]="infoSite.email"
+                   placeholder="{{ 'email' | translate }}">
+            <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+          </mat-form-field>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <mat-form-field class="col">
+            <input [formControl]="region" name="{{ 'price' | translate }}" required matInput type="text"
+                   [(ngModel)]="infoSite.tele"
+                   placeholder="Tele">
+            <mat-error *ngIf="region.invalid">{{getErrorMessageRegion()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col">
+            <input name="prix" matInput type="text" [(ngModel)]="infoSite.fax"
+                   placeholder="Fax">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <mat-form-field class="col">
+            <input [formControl]="lName" name="prix" required matInput type="text" [(ngModel)]="infoSite.debutDeService"
+                   placeholder="début de service">
+            <mat-error *ngIf="lName.invalid">{{getErrorMessageLName()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col">
+            <input [formControl]="fName" name="prix" required matInput type="text" [(ngModel)]="infoSite.finDeService"
+                   placeholder="fin de service">
+            <mat-error *ngIf="fName.invalid">{{getErrorMessageFName()}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <agm-map style="height: 250px;margin-bottom: 15px;" [zoom]="17" class="col" [latitude]="x" [longitude]="y">
+            <agm-marker (dragEnd)="markerDragEnd($event)" [label]="infoSite.name" [markerDraggable]="true"
+                        [latitude]="x" [longitude]="y"></agm-marker>
+          </agm-map>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <button mat-raised-button
+                [disabled]="email.invalid||name.invalid||lName.invalid||email.invalid||fName.invalid||region.invalid"
+                (click)="save()"
+                color="primary">{{ 'submit' | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+
+</div>

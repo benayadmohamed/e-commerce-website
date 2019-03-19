@@ -1,0 +1,144 @@
+<div>
+  <div class="example-loading-shade" *ngIf="load">
+    <mat-spinner></mat-spinner>
+  </div>
+  <mat-vertical-stepper *ngIf="!commandeValid" class="shadow1 checkout" [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template class="title" matStepLabel>{{ 'address' | translate |uppercase }}</ng-template>
+        <div class="row">
+          <div class=" col">
+            <div class="row">
+              <mat-form-field class="col">
+                <input [(ngModel)]="adresse.FName" formControlName="fName" name="FName" matInput type="text"
+                       placeholder="{{ 'firstName' | translate }}" required>
+              </mat-form-field>
+              <mat-form-field class="col">
+                <input [(ngModel)]="adresse.LName" formControlName="lName" name="LName" matInput type="text"
+                       placeholder="{{ 'lastName' | translate }}" required>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="col">
+                <input formControlName="phone" [(ngModel)]="adresse.phone" name="phone" matInput type="text"
+                       placeholder="Pho{{ 'phone' | translate }}ne" required>
+
+              </mat-form-field>
+              <mat-form-field class="col">
+                <input formControlName="adresse" name="Adresse" [(ngModel)]="adresse.address" matInput type="text"
+                       placeholder="{{ 'address' | translate }}" required>
+
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="col">
+                <input name="LName" formControlName="info" [(ngModel)]="adresse.info" matInput type="text"
+                       placeholder="{{ 'Moreinformation' | translate }}">
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <mat-form-field class="col">
+                <mat-select formControlName="Region"
+                            placeholder="{{ 'region' | translate }}" [(value)]="adresse.region_id" required>
+                  <mat-option *ngFor="let region of regions" [value]="region.id">{{region.name}}</mat-option>
+                </mat-select>
+
+              </mat-form-field>
+              <mat-form-field class="col">
+                <mat-select formControlName="ville"
+                            placeholder="{{ 'city' | translate }}" [(value)]="adresse.ville_id" required>
+                  <mat-option *ngFor="let ville of villes" [value]="ville.id">{{ville.name}}
+                  </mat-option>
+                </mat-select>
+
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <div class="col mt-20  text-center">
+                <button [disabled]="firstFormGroup.invalid" mat-mini-fab matStepperNext>
+                  <mat-icon>navigate_next</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template class="title" matStepLabel>{{ 'Deliverymethod' | translate |uppercase }}</ng-template>
+        Comment voulez-vous que votre commande soit livrée ?
+        <mat-radio-group required formControlName="typeL" #test class="d-flex flex-column">
+          <div *ngFor="let typeLivraison of typeLivraisons">
+            <mat-radio-button class="mt-12" (change)="changeTL(typeLivraison.id)" [value]="typeLivraison.id">
+              {{typeLivraison.name}}
+            </mat-radio-button>
+            <p class="mt-12 text-muted">{{typeLivraison.info}}</p>
+            <mat-divider class="mt-12"></mat-divider>
+          </div>
+        </mat-radio-group>
+        <div *ngIf="tarif" class="d-flex flex-column mtb-20">
+          <div *ngIf="tarif" class="d-flex flex-row flex-nowrap justify-content-between ">
+            <div>
+              <p>{{ 'subtotal' | translate }} :</p>
+              <p class="text-muted">Montant de livraison :</p>
+            </div>
+            <div class="text-right">
+              <p>{{commande.total}} Dhs</p>
+              <p class="text-muted">{{tarif.montant}} Dhs</p>
+            </div>
+          </div>
+          <mat-divider class="mtb-12"></mat-divider>
+          <div class="d-flex flex-row flex-nowrap justify-content-between ">
+            <div>
+              <p class="new-price">{{ 'total' | translate }} :</p>
+            </div>
+            <div class="text-right">
+              <p class="new-price">{{commande.total+tarif.montant}} Dhs</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-20">
+          <!--  <button mat-mini-fab matStepperPrevious>
+              <mat-icon>navigate_before</mat-icon>
+            </button>-->
+          <button class="ml-12" [disabled]="secondFormGroup.invalid" mat-mini-fab matStepperNext>
+            <mat-icon>navigate_next</mat-icon>
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>{{ 'Paymentmethod' | translate |uppercase }}</ng-template>
+        Quel moyen de paiement voulez-vous utiliser?
+        <mat-radio-group [(ngModel)]="typePaiement" formControlName="typeP" class="d-flex flex-column">
+          <mat-radio-button class="mt-12" value="1">Paiement cash à la livraison</mat-radio-button>
+          <mat-divider class="mt-12"></mat-divider>
+          <mat-radio-button class="mt-12" value="2">PayPal</mat-radio-button>
+        </mat-radio-group>
+
+        <div class="text-center mt-20">
+          <div class="ml-12" *ngIf="typePaiement==2">
+            <ngx-paypal [config]="payPalConfig" ></ngx-paypal>
+          </div>
+          <button (click)="cash()" color="primary" class="ml-12" *ngIf="typePaiement==1" mat-raised-button
+                  matStepperNext>
+            Terminer
+          </button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-vertical-stepper>
+  <mat-card *ngIf="commandeValid" class="example-card">
+    <mat-card-content>
+      <div class="d-flex flex-column justify-content-center align-items-center" style="height: 300px">
+        <button mat-fab color="primary">
+          <mat-icon>check</mat-icon>
+        </button>
+        <h2 class="ptb-20">Congratulation! Your order has been processed</h2>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

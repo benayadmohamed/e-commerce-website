@@ -1,0 +1,74 @@
+<mat-card>
+  <div class="row">
+    <div class="col">
+      <div class="d-flex">
+        <div class="flex-fill text-center">
+          <mat-icon color="primary" class="mat-icon-lg">home</mat-icon>
+          <h3>{{ 'address' | translate }}</h3>
+          <p>{{infoSite.adresse}}</p>
+        </div>
+        <div class="flex-fill text-center">
+          <mat-icon color="primary" class="mat-icon-lg">phone</mat-icon>
+          <h3>{{ 'phones' | translate }}</h3>
+          <p>{{infoSite.tele}}</p>
+        </div>
+        <div class="flex-fill text-center">
+          <mat-icon color="primary" class="mat-icon-lg">email</mat-icon>
+          <h3>{{ 'email' | translate }}</h3>
+          <p>{{infoSite.email}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row  justify-content-center">
+    <form #myform class="col-sm-11 col-md-9 col-lg-7">
+      <div class="row">
+        <div class="col text-center">
+          <h3>{{ 'CONTACTUS' | translate |uppercase }}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <mat-form-field class="col">
+          <input name="Name" matInput type="text" [(ngModel)]="contact.name"
+                 placeholder="{{ 'fullname' | translate }}">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col">
+          <input [formControl]="email" name="email" matInput type="email" [(ngModel)]="contact.email"
+                 placeholder="{{ 'email' | translate }}" required>
+          <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col">
+          <input name="tele" [(ngModel)]="contact.phone" type="text"
+                 matInput
+                 placeholder="{{ 'phone' | translate }}">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col">
+          <textarea [formControl]="name" name="message" [(ngModel)]="contact.message" required matInput
+                    placeholder="{{ 'message' | translate }}"></textarea>
+          <mat-error *ngIf="email.invalid">{{getErrorMessageName()}}</mat-error>
+        </mat-form-field>
+      </div>
+      <re-captcha
+        #captchaRef="reCaptcha"
+        siteKey="{{reCaptchaKey}}"
+        size="invisible"
+        (resolved)="$event && send(myform,$event)"
+      ></re-captcha>
+      <div class="row">
+        <div class="col text-center">
+          <button mat-raised-button (click)="captchaRef.execute()" [disabled]="name.invalid||email.invalid"
+                  color="primary">{{ 'submit' | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</mat-card>

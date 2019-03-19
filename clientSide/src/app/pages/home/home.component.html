@@ -1,0 +1,37 @@
+<div class="swiper-container">
+  <swiper [config]="config">
+    <div class="swiper-items" *ngFor="let act of actualies"
+         [ngStyle]="{'background-image':'url('+url.concat(act.image.src)+')'}">
+      <h1 class="title">{{act.titre}}</h1>
+      <h1 class="subtitle">{{act.sousTitre}}</h1>
+    </div>
+  </swiper>
+  <div class="swiper-pagination"></div>
+</div>
+
+<mat-card class="example-card">
+  <mat-card-content>
+    <mat-tab-group mat-stretch-tabs class="mytabs">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{ 'NewArrivals' | translate }}
+        </ng-template>
+        <ng-template style="min-height: 200px" matTabContent>
+          <div style="min-height: 200px">
+            <app-new-arrivales></app-new-arrivales>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{ 'OnSale' | translate }}
+        </ng-template>
+        <ng-template matTabContent>
+          <div style="min-height: 200px">
+            <app-on-sale></app-on-sale>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

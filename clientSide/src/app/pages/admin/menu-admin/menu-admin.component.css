@@ -1,0 +1,9 @@
+.sidenav-container {
+  /*  min-height: calc(100% - 80px); */
+  background-color: transparent;
+}
+
+mat-sidenav {
+  overflow-y: hidden;
+}
+

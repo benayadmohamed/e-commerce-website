@@ -1,0 +1,7 @@
+:host /deep/ .myTable .mat-form-field-underline {
+  background-color: transparent;
+}
+
+:host /deep/ .myTable .mat-form-field-not-disabled .mat-form-field-underline {
+  background-color: rgba(0, 0, 0, 0.42);
+}

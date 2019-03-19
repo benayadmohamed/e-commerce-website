@@ -1,0 +1,12 @@
+<mat-nav-list>
+
+  <a mat-list-item color="primary" routerLink="home" routerLinkActive="active">{{ 'Home' | translate|uppercase }}</a>
+  <a mat-list-item color="primary" routerLink="produits" routerLinkActive="active">{{ 'AllProducts' |translate|uppercase
+    }}
+  </a>
+  <a *ngFor="let cat of categories" mat-list-item color="primary" routerLink="/mm"
+     routerLinkActive="active">{{cat.name|uppercase}}
+  </a>
+  <a mat-list-item color="primary" routerLink="contact" routerLinkActive="active">{{ 'contact' | translate |uppercase
+    }}</a>
+</mat-nav-list>

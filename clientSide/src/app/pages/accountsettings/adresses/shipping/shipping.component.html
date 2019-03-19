@@ -1,0 +1,63 @@
+<form #myForm="ngForm" class="row">
+  <div class="example-container col">
+    <div class="row">
+      <mat-form-field class="col">
+        <input [(ngModel)]="adressePro.FName" [formControl]="fName" name="FName" matInput type="text"
+               placeholder="{{ 'firstName' | translate }}" required>
+        <mat-error *ngIf="fName.invalid">{{getErrorMessageFName()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col">
+        <input [(ngModel)]="adressePro.LName" [formControl]="lName" name="LName" matInput type="text"
+               placeholder="{{ 'lastName' | translate }}" required>
+        <mat-error *ngIf="lName.invalid">{{getErrorMessageLName()}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="col">
+        <input [(ngModel)]="adressePro.phone" [formControl]="phone" name="phone" matInput type="text"
+               placeholder="{{ 'phone' | translate }}" required>
+        <mat-error *ngIf="phone.invalid">{{getErrorMessagePhone()}}</mat-error>
+
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="col">
+        <input [(ngModel)]="adressePro.address" [formControl]="adresse" name="Adresse" matInput type="text"
+               placeholder="{{ 'address' | translate }}" required>
+        <mat-error *ngIf="adresse.invalid">{{getErrorMessageAdresse()}}</mat-error>
+
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="col">
+        <input [(ngModel)]="adressePro.info" name="LName" matInput type="text"
+               placeholder="{{ 'Moreinformation' | translate }}">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field class="col">
+        <mat-select
+          [(value)]="adressePro.region_id" placeholder="{{ 'region' | translate }}">
+          <mat-option *ngFor="let region of regions" [value]="region.id">{{region.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="region.invalid">{{getErrorMessageRegion()}}</mat-error>
+
+      </mat-form-field>
+      <mat-form-field class="col">
+        <mat-select [(value)]="adressePro.ville_id"
+                    placeholder="{{ 'city' | translate }}">
+          <mat-option *ngFor="let ville of villes" [value]="ville.id">{{ville.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="ville.invalid">{{getErrorMessageVille()}}</mat-error>
+
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="col mt-20  text-center">
+        <button mat-raised-button (click)="save()" color="primary">{{ 'save' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</form>

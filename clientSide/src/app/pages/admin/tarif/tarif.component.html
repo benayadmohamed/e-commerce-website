@@ -1,0 +1,73 @@
+<div class="d-flex flex-column">
+  <mat-form-field>
+    <mat-select #typeLivraison (valueChange)="onChangeTypeLivraison_id(typeLivraison.value)"
+                [(value)]="typeLivraison_id"
+                placeholder="Type livraison">
+      <mat-option *ngFor="let typeLivraison of typeLivraisons" [value]="typeLivraison.id">{{typeLivraison.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 shadow1 myTable">
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> {{ 'Rate' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field
+          [ngClass]="editCache[element.id.toString()].edit ?'mat-form-field-not-disabled':''" mat-placeholder=""
+          floatLabel="never">
+          <input [readonly]="!editCache[element.id.toString()].edit" placeholder="Tarif"
+                 [(ngModel)]="editCache[element.id.toString()].data.montant" matInput>
+          <span matSuffix>DH</span>
+
+        </mat-form-field>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="ville">
+      <th mat-header-cell *matHeaderCellDef> {{ 'city' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field
+          [ngClass]="editCache[element.id.toString()].edit ?'mat-form-field-not-disabled':''" mat-placeholder=""
+          floatLabel="never">
+          <mat-select [disabled]="!editCache[element.id.toString()].edit"
+                      [(value)]="editCache[element.id.toString()].data.ville_id"
+                      placeholder="{{ 'city' | translate }}">
+            <mat-option *ngFor="let ville of villes" [value]="ville.id">{{ville.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actionsColumn">
+      <th class="wc-100" mat-header-cell *matHeaderCellDef><a color="primary" mat-icon-button *ngIf="!addTarif"
+                                                              (click)="add()">
+        <mat-icon>add_circle</mat-icon>
+      </a></th>
+      <td mat-cell *matCellDef="let element" class="wc-100">
+        <div class="d-flex flex-row flex-nowrap">
+          <a color="primary" mat-icon-button *ngIf="!editCache[element.id.toString()].edit"
+             (click)="startEdit(element.id.toString())">
+            <mat-icon>edit</mat-icon>
+          </a>
+          <a color="primary" mat-icon-button *ngIf="editCache[element.id.toString()].edit"
+             (click)="saveEdit(element.id.toString())">
+            <mat-icon>done</mat-icon>
+          </a>
+          <a color="primary" mat-icon-button *ngIf="editCache[element.id.toString()].edit"
+             (click)="cancelEdit(element.id.toString())">
+            <mat-icon>cancel</mat-icon>
+          </a>
+          <a color="warn" mat-icon-button *ngIf="!editCache[element.id.toString()].edit" (click)="delete(element.id)">
+            <mat-icon>delete_forever</mat-icon>
+          </a>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+</div>

@@ -1,0 +1,36 @@
+<button class="buttonmenu" mat-button [matMenuTriggerFor]="menu">
+  <span>ACCOUNT</span>
+  <mat-icon>arrow_drop_down</mat-icon>
+</button>
+
+<mat-menu style="top: 32px" #menu="matMenu">
+  <div *ngIf="!loggedIn">
+    <button mat-menu-item routerLink="/main/login">
+      <mat-icon>dialpad</mat-icon>
+      <span>Login</span>
+    </button>
+    <button mat-menu-item disabled>
+      <mat-icon>voicemail</mat-icon>
+      <span>Registre</span>
+    </button>
+  </div>
+  <div *ngIf="loggedIn">
+    <button mat-menu-item disabled>
+      <mat-icon>voicemail</mat-icon>
+      <span>Check voicemail</span>
+    </button>
+    <button routerLink="/main/accountSettingsComponent" mat-menu-item>
+      <mat-icon>notifications_off</mat-icon>
+      <span>Account Settings</span>
+    </button>
+    <button (click)="logout($event)" mat-menu-item>
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Logout</span>
+    </button>
+    <button *ngIf="loggedInAdmin" routerLink="/main/admin" mat-menu-item>
+      <mat-icon>settings_applications</mat-icon>
+      <span>espace admin</span>
+    </button>
+  </div>
+</mat-menu>
+

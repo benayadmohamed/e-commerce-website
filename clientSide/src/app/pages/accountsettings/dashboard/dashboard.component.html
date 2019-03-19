@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col">
+    <mat-card class="myCard ">
+      <mat-card-header>
+        <mat-card-title>{{ 'AccountInformation' | translate }}</mat-card-title>
+        <a mat-icon-button routerLink="../infoP">
+          <mat-icon>edit</mat-icon>
+        </a>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <p>{{user.name}}</p>
+        <p>{{user.email}}</p>
+        <p><a routerLink="../infoP">{{ 'Changepassword' | translate }}</a></p>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+  <div class="col">
+    <mat-card class="myCard ">
+      <mat-card-header>
+        <mat-card-title>{{ 'addresses' | translate }}</mat-card-title>
+        <a mat-icon-button routerLink="../adresses">
+          <mat-icon>edit</mat-icon>
+        </a>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <p>{{ 'billingAddress' | translate }}</p>
+        <p> {{ 'shippingAddress' | translate }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

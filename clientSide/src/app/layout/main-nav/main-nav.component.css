@@ -1,0 +1,113 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 280px;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+}
+
+ng-content {
+  height: 100%;
+}
+
+.hiddennav {
+  display: none;
+}
+
+.nav2 {
+  height: 104px;
+}
+
+.divider {
+
+  border-bottom: 1px solid rgba(255, 235, 238, .2);
+}
+
+.nav1 {
+  height: 32px;
+  font-size: 13px;
+}
+
+app-menu-account {
+  line-height: 31px;
+}
+
+.nav1 button {
+  height: 31px;
+  border-radius: 0;
+  line-height: 31px;
+}
+
+.menu2 {
+  height: 48px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #FAFAFA;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.menu2 button {
+  height: 48px;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+}
+
+.menu2 button:hover {
+  border-bottom: 2px solid black;
+}
+
+.menu2 button.active {
+  border-bottom: 2px solid black;
+}
+
+.nav80 {
+  width: 70%;
+  padding: 0;
+}
+
+/*
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0px 20px;
+  min-height: calc(100vh - 448px);
+}
+*/
+.infoFooter {
+  margin: 14px 10px;
+}
+
+mat-sidenav-content {
+  background-image: url("src/assets/back2.png");
+  background-size: 150px;
+}
+
+.footer {
+  margin-top: 20px;
+  padding-top: 15px;
+  font: initial;
+}
+
+.footer .flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.flex .flex-col-1 {
+  min-width: 200px;
+  flex: 1 1 auto;
+}
+
+.flex .flex-col-2 {
+  min-width: 300px;
+  flex: 4 1 auto;
+}
+
+agm-map {
+  height: 200px;
+  margin: 20px 20px;
+}

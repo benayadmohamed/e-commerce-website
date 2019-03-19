@@ -1,0 +1,77 @@
+<mat-card>
+  <div class="row">
+    <div class="col-11  col-sm-12">
+      <div class="row">
+        <div class="col-10 col-sm-5">
+          <div class="swiper-container">
+            <swiper [config]="config" [(index)]="test">
+              <div *ngFor="let image of produit.article.images" class="swiper-items"
+                   [ngStyle]="{'background-image': 'url('+url.concat(image.src)+')'}">
+              </div>
+            </swiper>
+          </div>
+          <div class="swiper-container2">
+            <swiper [config]="config2" [(index)]="test">
+              <div *ngFor="let image of produit.article.images" class="swiper-items"
+                   [ngStyle]="{'background-image': 'url('+url.concat(image.src)+')'}">
+              </div>
+            </swiper>
+          </div>
+        </div>
+        <div class="col-11 col-sm-6">
+          <h2>{{produit.name}}</h2>
+          <div>
+            <p><span>{{ 'category' | translate }}: </span><span>{{produit.categorie.name}}</span></p>
+            <p><span>{{ 'Availibility' | translate }}: </span><span *ngIf="produit.article.stock>0">{{ 'Instock' | translate }}</span><span
+              *ngIf="produit.article.stock===0">{{ 'ondemand' | translate }}</span></p>
+          </div>
+
+          <div class="descriptif-container">
+            <p>{{produit.descriptif}}</p>
+          </div>
+          <div class="divider"></div>
+          <h2>$175</h2>
+          <div class="d-flex flex-row justify-content-between flex-wrap">
+            <div>
+              <span>{{ 'Quantity' | translate }}:</span>
+              <div *ngIf="produit.article.stock>0">
+                <button (click)="removeQu(produit)"
+                        mat-icon-button>
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <span *ngIf="produit.ligneCommande">{{produit.ligneCommande.quantite}}  </span>
+                <span *ngIf="!produit.ligneCommande">1</span>
+                <button
+                  (click)="addQu(produit)"
+                  mat-icon-button>
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+              <span *ngIf="produit.article.stock<=0">{{ 'outofstock' | translate }}</span>
+            </div>
+            <div>
+              <button matTooltip="Add to wishlist" (click)="addToWishlist(produit.id)" mat-icon-button>
+                <mat-icon>favorite</mat-icon>
+              </button>
+              <button matTooltip="Add to cart" (click)="addToShoppingCart(produit)" mat-icon-button>
+                <mat-icon>shopping_cart</mat-icon>
+              </button>
+              <button matTooltip="Add to compare" (click)="addToCompare(produit.id)" mat-icon-button>
+                <mat-icon>compare</mat-icon>
+              </button>
+              <button *ngIf="loggedInAdmin" routerLink="/main/admin/produit/updateProduit/{{produit.id}}"
+                      matTooltip="edit" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-12">sala3</div>
+      </div>
+
+    </div>
+  </div>
+</mat-card>
